@@ -52,7 +52,7 @@ export class AccountService {
     }
 
     register(account: Account) {
-        return this.http.post(`https://eventfunctionsp2.azurewebsites.net/api/register`, account);
+        return this.http.get(`https://eventfunctionsp2.azurewebsites.net/api/Test/register`, account);
     }
 
     verifyEmail(token: string) {
