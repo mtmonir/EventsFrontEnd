@@ -35,3 +35,4 @@ steps:
     appName: 'MyFE'
     package: '$(System.DefaultWorkingDirectory)/**/*.zip'
     deploymentMethod: 'auto'
+- task: PublishBuildArtifacts@1
