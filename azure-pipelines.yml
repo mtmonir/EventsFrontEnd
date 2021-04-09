@@ -30,7 +30,8 @@ steps:
 
 - task: AzureWebApp@1
   inputs:
-    azureSubscription: 'Azure subscription 1 (6f1b150c-0dfd-4b44-a919-53e8ef200a61)'
+    azureSubscription: 'Azure subscription 1(6f1b150c-0dfd-4b44-a919-53e8ef200a61)'
     appType: 'webApp'
-    appName: 'EventsFunctionFE'
-    package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
+    appName: 'MyFE'
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    deploymentMethod: 'auto'
