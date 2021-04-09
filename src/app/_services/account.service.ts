@@ -30,7 +30,8 @@ export class AccountService {
         return this.http.get<any>(`https://eventfunctionsp2.azurewebsites.net/api/User/login/${email}/${password}`)
             .pipe(map(account => {
                 this.accountSubject.next(account);
-                this.startRefreshTokenTimer();
+                console.log(account);
+                //this.startRefreshTokenTimer();
                 return account;
             }));
     }
