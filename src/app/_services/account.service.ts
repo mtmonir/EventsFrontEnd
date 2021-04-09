@@ -27,7 +27,7 @@ export class AccountService {
     }
 
     login(email: string, password: string) {
-        return this.http.post<any>(`https://eventfunctionsp2.azurewebsites.net/api/Test/login`, { email, password }, { withCredentials: true })
+        return this.http.get<any>(`https://eventfunctionsp2.azurewebsites.net/api/Test/login/${email}/${password}`, { email, password }, { withCredentials: true })
             .pipe(map(account => {
                 this.accountSubject.next(account);
                 this.startRefreshTokenTimer();
@@ -52,7 +52,7 @@ export class AccountService {
     }
 
     register(account: Account) {
-        return this.http.post(`https://eventfunctionsp2.azurewebsites.net/api/Test/register`, account);
+        return this.http.post(`https://eventfunctionsp2.azurewebsites.net/api/register`, account);
     }
 
     verifyEmail(token: string) {
