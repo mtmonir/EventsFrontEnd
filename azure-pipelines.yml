@@ -28,11 +28,10 @@ steps:
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     replaceExistingArchive: true
 
-- task: PublishBuildArtifacts@1
 - task: AzureWebApp@1
   inputs:
     azureSubscription: 'Azure subscription 1(6f1b150c-0dfd-4b44-a919-53e8ef200a61)'
     appType: 'webApp'
     appName: 'MyFE'
-    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
     deploymentMethod: 'auto'
