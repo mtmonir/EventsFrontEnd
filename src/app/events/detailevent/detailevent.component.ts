@@ -27,6 +27,7 @@ export class DetaileventComponent implements OnInit {
   getRawDetailEvent(){
     this.eventService.getById(this.eventid)
     .subscribe(x=> this.revent = x);
+    console.log("hello");
   }
 }
 
