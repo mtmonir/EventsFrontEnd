@@ -6,6 +6,7 @@ export class Account {
     fName: string;
     lName: string;
     email: string;
+    isEventManager: boolean;
     role: Role;
     jwtToken?: string;
 }
