@@ -7,7 +7,10 @@
     <strong>Description: </strong> {{revent.description}}<br />
     <strong>Available Capacity: </strong> {{revent.currentAttending}} / {{revent.capacity}}<br />
     <strong>Contact Person: </strong> {{revent.manager}} <br />
-    <img src="{{revent.locationMap}}" style="width:400px; height: 400px" alt="">
+    <img src="{{revent.locationMap}}" style="width:400px; height: 400px" alt=""><br />
+    <button class="btn btn-primary" (click)="onRegisterEvent()">
+        Register for this Event
+    </button>
 </p>
 <router-outlet></router-outlet>
 

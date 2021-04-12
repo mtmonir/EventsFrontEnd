@@ -68,5 +68,9 @@ export class EventService {
             }));
     }
 
+    registerEvent(uid: string, eid: string){
+        return this.http.get(`https://eventfunctionsp2.azurewebsites.net/api/Event/signup/${uid}/${eid}`);
+    }
+
     
 }

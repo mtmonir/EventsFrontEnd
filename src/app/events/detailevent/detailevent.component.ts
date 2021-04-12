@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { EventService } from '@app/_services';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AccountService, AlertService, EventService } from '@app/_services';
 
 import { RawDetailEvent} from './../../_models';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-detailevent',
@@ -12,7 +13,12 @@ import { RawDetailEvent} from './../../_models';
 export class DetaileventComponent implements OnInit {
   eventid: string;
   revent = new RawDetailEvent();
-  constructor(private route: ActivatedRoute, private eventService: EventService) { }
+  account = this.accountService.accountValue;
+  constructor(private route: ActivatedRoute, 
+    private eventService: EventService, 
+    private accountService: AccountService,
+    private alertService: AlertService,
+    private router: Router) { }
 
   ngOnInit() {
     this.route.queryParams
@@ -28,6 +34,24 @@ export class DetaileventComponent implements OnInit {
     this.eventService.getById(this.eventid)
     .subscribe(x=> this.revent = x);
     console.log("hello");
+  }
+
+  onRegisterEvent(){
+    this.alertService.clear();
+   
+    this.eventService.registerEvent(this.account.id, this.eventid)
+      
+      .subscribe({
+        next: () => {
+            console.log("was successful")
+            this.alertService.success('Event Registeration successful, please check your email for verification instructions', { keepAfterRouteChange: true });
+            this.router.navigate(['../ShowAll'], { relativeTo: this.route });
+        },
+        error: error => {
+            this.alertService.error("I m sorry.. something went wrong...", error);
+           // this.router.navigate(['../ShowAll'], { relativeTo: this.route });
+        }
+    });
   }
 }
 

@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { EventService, AlertService, AccountService } from '@app/_services';
-import { MustMatch } from '@app/_helpers';
+
 
 @Component({
   selector: 'app-create-event',
@@ -12,7 +12,7 @@ import { MustMatch } from '@app/_helpers';
   styleUrls: ['./create-event.component.less']
 })
 export class CreateEventComponent implements OnInit {
-  account = this.accountService.accountValue
+  account = this.accountService.accountValue;
   form: FormGroup;
   loading = false;
   submitted = false;
