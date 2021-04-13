@@ -1,6 +1,18 @@
-﻿<div class="p-4">
+<div class="p-4">
     <div class="container">
         <h1>Hi {{account.fName}}!</h1>
         <p>You're logged in with Events and Functions Website..</p>
     </div>
+
+<h2>Your Events</h2>
+<div *ngFor="let event of allSignedEvents">
+<p>
+    <strong>Event: </strong> {{event.name}}<br />
+    <strong>Location: </strong> {{event.location}}}<br />
+    <strong>Date and Time: </strong> {{event.date}}
+</p>
+<p><a routerLink="events/Details" [queryParams]="{ id: event.id, signed: 'true'}">Write Review</a></p>
+
+...</div>
+<router-outlet></router-outlet>
 </div>

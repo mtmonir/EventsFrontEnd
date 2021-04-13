@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map, finalize } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
-import { Event, RawPreviewEvent, RawDetailEvent } from '@app/_models';
+import { Event, RawPreviewEvent, RawDetailEvent, Review } from '@app/_models';
 
 
 const baseUrl = `${environment.apiUrl}/Events`;
@@ -16,6 +16,7 @@ export class EventService {
     public Event: Observable<Event>;
     public RawPreviewEvent: Observable<RawPreviewEvent>;
     public RawDetailEvent: Observable<RawDetailEvent>;
+    public Review: Observable<Review>;
 
     constructor(
         private router: Router,
@@ -70,6 +71,13 @@ export class EventService {
 
     registerEvent(uid: string, eid: string){
         return this.http.get(`https://eventfunctionsp2.azurewebsites.net/api/Event/signup/${uid}/${eid}`);
+    }
+    getAllSigned(uid: string){
+        return this.http.get<RawPreviewEvent[]>(`https://eventfunctionsp2.azurewebsites.net/api/Event/allsigned/${uid}`);
+    }
+
+    submitReview(review: Review){
+        return this.http.post(`https://eventfunctionsp2.azurewebsites.net/api/Event/review`, Review);
     }
 
     
