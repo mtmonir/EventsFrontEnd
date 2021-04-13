@@ -5,3 +5,4 @@ export * from './event';
 export * from './RawPreviewEvent';
 export * from './rawDetailEvent';
 export * from './review';
+export * from './reviews';

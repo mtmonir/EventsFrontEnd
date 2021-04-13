@@ -2,7 +2,7 @@
 
 <p>
     <strong>Event: </strong> {{revent.name}}<br />
-    <strong>Location: </strong> {{revent.location}}}<br />
+    <strong>Location: </strong> {{revent.location}}<br />
     <strong>Date and Time: </strong> {{revent.date}}<br />
     <strong>Description: </strong> {{revent.description}}<br />
     <strong>Available Capacity: </strong> {{revent.currentAttending}} / {{revent.capacity}}<br />
@@ -35,7 +35,7 @@
                     <label>Description</label>
                     <input type="text" formControlName="description" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
                     <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
-                        <div *ngIf="f.description.errors.required">Description is required</div>
+                        <div *ngIf="f.description.errors.required">Description is   </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -47,6 +47,8 @@
             </div>
         </form>
     </div>
+    <reviews id={{eventid}}></reviews>
 
-<router-outlet></router-outlet>
+<!-- <app-reviews/[eventid></app-reviews> -->
+<!-- <router-outlet></router-outlet> -->
 
