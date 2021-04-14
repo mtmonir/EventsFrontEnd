@@ -1,6 +1,6 @@
 <h1>Event Detail</h1>
 
-<p>
+<div>
     <strong>Event: </strong> {{revent.name}}<br />
     <strong>Location: </strong> {{revent.location}}<br />
     <strong>Date and Time: </strong> {{revent.date}}<br />
@@ -9,10 +9,18 @@
     <strong>Available Capacity: </strong> {{revent.currentAttending}} / {{revent.capacity}}<br />
     <strong>Contact Person: </strong> {{revent.manager}} <br />
     <img src="{{revent.locationMap}}" style="width:400px; height: 400px" alt=""><br />
+    
+    <div *ngIf="actionRegisterEvent()">
     <button class="btn btn-primary" (click)="onRegisterEvent()">
         Register for this Event
     </button>
-</p>
+    </div>
+    <div *ngIf="actionUnRegisterEvent()">
+        <button class="btn btn-danger" (click)="onUnRegisterEvent()">
+            Cancel Registeration
+        </button>
+    </div>
+</div>
     <div *ngIf="isSigned()">
         <br />
         <form [formGroup]="form" (ngSubmit)="onSubmit()">

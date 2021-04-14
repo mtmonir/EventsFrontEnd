@@ -7,13 +7,14 @@ import { AccountService, EventService } from "./../../_services";
 export class ElistComponent implements OnInit {
     events: any[];
     account = this.accountService.accountValue;
-
+    gtotal = 0;
     constructor(private accountService: AccountService, private eventService: EventService) {}
 
     ngOnInit() {
-        this.eventService.getAllSigned(this.account.id)
+        this.eventService.getAllByManager(this.account.id)
             .pipe(first())
             .subscribe(events => this.events = events);
+        this.getAllRevData();
     }
 
     deleteEvent(id: string) {
@@ -24,5 +25,11 @@ export class ElistComponent implements OnInit {
             .subscribe(() => {
                 this.events = this.events.filter(x => x.id !== id) 
             });
+    }
+
+    getAllRevData(){
+         this.eventService.getAllRevData(this.account.id)
+        .pipe(first())
+        .subscribe(t => this.gtotal = t);
     }
 }

@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map, finalize } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
-import { Event, RawPreviewEvent, RawDetailEvent, Review, Reviews } from '@app/_models';
+import { Event, RawPreviewEvent, RawDetailEvent, Review, Reviews, RawManagerEvent } from '@app/_models';
 
 
 const baseUrl = `${environment.apiUrl}/Events`;
@@ -18,9 +18,10 @@ export class EventService {
     public RawDetailEvent: Observable<RawDetailEvent>;
     public Review: Observable<Review>;
     public Reviews: Observable<Reviews>;
+    public RawManagerEvent: Observable<RawManagerEvent>;
 
     constructor(
-        private router: Router,
+      //  private router: Router,
         private http: HttpClient
     ) {
         this.EventSubject = new BehaviorSubject<Event>(null);
@@ -40,6 +41,9 @@ export class EventService {
 
     getAll() {
         return  this.http.get<RawPreviewEvent[]>('https://eventfunctionsp2.azurewebsites.net/api/Event/all');       
+    }
+    getAllUpcoming() {
+        return  this.http.get<RawPreviewEvent[]>('https://eventfunctionsp2.azurewebsites.net/api/Event/allupcoming');       
     }
 
     getById(id: string) {
@@ -62,7 +66,7 @@ export class EventService {
     }
     
     delete(id: string) {
-        return this.http.delete(`${baseUrl}/${id}`)
+        return this.http.delete(`https://eventfunctionsp2.azurewebsites.net/api/Manager/delete/${id}`)
             .pipe(finalize(() => {
                 // auto logout if the logged in Event was deleted
                 if (id === this.EventValue.id)
@@ -70,11 +74,19 @@ export class EventService {
             }));
     }
 
+
     registerEvent(uid: string, eid: string){
         return this.http.get(`https://eventfunctionsp2.azurewebsites.net/api/Event/signup/${uid}/${eid}`);
     }
-    getAllSigned(uid: string){
+    unregisterEvent(uid: string, eid: string){
+        return this.http.delete(`https://eventfunctionsp2.azurewebsites.net/api/Event/deletesignup/${uid}/${eid}`);
+    }
+    getAllFSigned(uid: string){
         return this.http.get<RawPreviewEvent[]>(`https://eventfunctionsp2.azurewebsites.net/api/Event/allsigned/${uid}`);
+    }
+
+    getAllPSigned(uid: string){
+        return this.http.get<RawPreviewEvent[]>(`https://eventfunctionsp2.azurewebsites.net/api/Event/allprevious/${uid}`);
     }
 
     submitReview(review: Review){
@@ -85,5 +97,10 @@ export class EventService {
         return this.http.get<Reviews[]>(`https://eventfunctionsp2.azurewebsites.net/api/Event/allreviews/${eid}`);
     }
 
-    
+    getAllByManager(uid: string){
+        return this.http.get<RawManagerEvent[]>(`https://eventfunctionsp2.azurewebsites.net/api/Manager/getevents/${uid}`);
+    }
+    getAllRevData(uid: string){
+        return this.http.get<number>(`https://eventfunctionsp2.azurewebsites.net/api/Manager/getallrevdata/${uid}`);
+    }
 }

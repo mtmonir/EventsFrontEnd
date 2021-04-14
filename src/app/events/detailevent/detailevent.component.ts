@@ -19,6 +19,7 @@ export class DetaileventComponent implements OnInit {
   loading = false;
   submitted = false;
   esigneduser = false;
+  action ="";
   constructor(private route: ActivatedRoute, 
     private eventService: EventService, 
     private accountService: AccountService,
@@ -31,7 +32,9 @@ export class DetaileventComponent implements OnInit {
         .subscribe(params => {
         this.eventid = params.id;
         this.esigneduser = params.signed;
+        this.action = params.action;
         console.log(this.eventid);
+        console.log(this.action);
       }
     );
 
@@ -61,6 +64,23 @@ export class DetaileventComponent implements OnInit {
         next: () => {
             console.log("was successful")
             this.alertService.success('Event Registeration successful, please check your email for verification instructions', { keepAfterRouteChange: true });
+            this.router.navigate(['../ShowAll'], { relativeTo: this.route });
+        },
+        error: error => {
+            this.alertService.error("I m sorry.. something went wrong...", error);
+           // this.router.navigate(['../ShowAll'], { relativeTo: this.route });
+        }
+    });
+  }
+  onUnRegisterEvent(){
+    this.alertService.clear();
+   
+    this.eventService.unregisterEvent(this.account.id, this.eventid)
+      
+      .subscribe({
+        next: () => {
+            console.log("was successful")
+            this.alertService.success('Event UnRegisteration successfuly', { keepAfterRouteChange: true });
             this.router.navigate(['../ShowAll'], { relativeTo: this.route });
         },
         error: error => {
@@ -99,10 +119,18 @@ export class DetaileventComponent implements OnInit {
   }
 
   isSigned(){
-    if (this.esigneduser)
+    if ((this.esigneduser) || (this.action=='writeReview'))
       return true;
     else
       return false;
+  }
+  actionRegisterEvent(){
+    if (this.action == 'register')
+       return true;
+  }
+  actionUnRegisterEvent(){
+    if (this.action == 'unregister')
+       return true;
   }
 }
 

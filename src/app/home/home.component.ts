@@ -6,7 +6,8 @@ import { RawPreviewEvent} from './../_models';
 @Component({ templateUrl: 'home.component.html' })
 export class HomeComponent {
     account = this.accountService.accountValue;
-    public allSignedEvents =  Array<RawPreviewEvent>();
+    public allFSignedEvents =  Array<RawPreviewEvent>();
+    public allPSignedEvents =  Array<RawPreviewEvent>();
 
     constructor(
     
@@ -17,13 +18,20 @@ export class HomeComponent {
 
     ngOnInit(): void {
 
-      this.getAllSignedEvents();
+      this.getAllFSignedEvents();
+      this.getAllPSignedEvents();
     }
   
-    getAllSignedEvents(){
-      this.eventService.getAllSigned(this.account.id)
-      .subscribe(x => this.allSignedEvents = x);
-      console.log(this.allSignedEvents);
+    getAllFSignedEvents(){
+      this.eventService.getAllFSigned(this.account.id)
+      .subscribe(x => this.allFSignedEvents = x);
+      console.log(this.allFSignedEvents);
     
+    }
+
+    getAllPSignedEvents(){
+      this.eventService.getAllPSigned(this.account.id)
+      .subscribe(x => this.allPSignedEvents = x);
+      console.log(this.allPSignedEvents);
     }
 }

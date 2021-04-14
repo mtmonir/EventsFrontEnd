@@ -5,8 +5,9 @@
     <thead>
         <tr>
             <th style="width:30%">Name</th>
-            <th style="width:30%">Capacity</th>
-            <th style="width:30%">Sale</th>
+            <th style="width:20%">Capacity</th>
+            <th style="width:20%">Ticket Sold</th>
+            <th style="width:20%">Total Sale</th>
             <th style="width:10%"></th>
         </tr>
     </thead>
@@ -14,14 +15,24 @@
         <tr *ngFor="let event of events">
             <td>{{event.name}} </td>
             <td>{{event.capacity}}</td>
-            <td>{{event.sale}}</td>
+            <td>{{event.currentlyAttending}}</td>
+            <td>{{event.totalSales}}</td>
             <td style="white-space: nowrap">
                 <a routerLink="edit/{{event.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
-                <button (click)="deleteAccount(event.id)" class="btn btn-sm btn-danger btn-delete-account" [disabled]="account.isDeleting">
+                <button (click)="deleteEvent(event.id)" class="btn btn-sm btn-danger btn-delete-account" [disabled]="account.isDeleting">
                     <span *ngIf="event.isDeleting" class="spinner-border spinner-border-sm"></span>
                     <span *ngIf="!event.isDeleting">Delete</span>
                 </button>
             </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <strong>
+            <td>Grand Total</td>
+            <td>{{gtotal}}</td>
+            </strong>
+            <td></td>
         </tr>
         <tr *ngIf="!events">
             <td colspan="4" class="text-center">
