@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { EventService, AlertService, AccountService } from '@app/_services';
+
+import { EventService,  AccountService } from '@app/_services';
 import { RawPreviewEvent} from './../_models';
 
 @Component({ templateUrl: 'home.component.html' })
@@ -9,10 +9,9 @@ export class HomeComponent {
     public allSignedEvents =  Array<RawPreviewEvent>();
 
     constructor(
-      private route: ActivatedRoute,
-      private router: Router,
+    
       private eventService: EventService,
-      private alertService: AlertService,
+    
       private accountService: AccountService
     ) { } 
 

@@ -10,5 +10,6 @@ export class Event {
     state: string;
     zipcode: string;
     managerid: string;
+    ticketPrice: number;
     eventtype: string;
 }

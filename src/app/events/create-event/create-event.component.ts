@@ -34,6 +34,7 @@ export class CreateEventComponent implements OnInit {
         date: ['', Validators.required],
         eventType:"ea3bf8bf-5e12-45b0-bd9a-209defc23e9c",
         street:[''],
+        ticketPrice: [''],
         capacity:[''],
         city:[''],
         state:[''],

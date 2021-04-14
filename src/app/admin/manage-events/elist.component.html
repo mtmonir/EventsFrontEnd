@@ -1,0 +1,32 @@
+﻿<h1>Events</h1>
+<p>All accounts from secure (admin only) api end point:</p>
+<a routerLink="add" class="btn btn-sm btn-success mb-2">Manage Events</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th style="width:30%">Name</th>
+            <th style="width:30%">Capacity</th>
+            <th style="width:30%">Sale</th>
+            <th style="width:10%"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let event of events">
+            <td>{{event.name}} </td>
+            <td>{{event.capacity}}</td>
+            <td>{{event.sale}}</td>
+            <td style="white-space: nowrap">
+                <a routerLink="edit/{{event.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
+                <button (click)="deleteAccount(event.id)" class="btn btn-sm btn-danger btn-delete-account" [disabled]="account.isDeleting">
+                    <span *ngIf="event.isDeleting" class="spinner-border spinner-border-sm"></span>
+                    <span *ngIf="!event.isDeleting">Delete</span>
+                </button>
+            </td>
+        </tr>
+        <tr *ngIf="!events">
+            <td colspan="4" class="text-center">
+                <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>
