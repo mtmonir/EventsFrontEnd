@@ -16,6 +16,7 @@ export class CreateEventComponent implements OnInit {
   form: FormGroup;
   loading = false;
   submitted = false;
+  eventTypes: any;
 
   constructor(
       private formBuilder: FormBuilder,
@@ -42,6 +43,8 @@ export class CreateEventComponent implements OnInit {
         description:[''],
 
     });
+
+    this.getEventTypeTable();
 }
 
   // convenience getter for easy access to form fields
@@ -71,6 +74,11 @@ export class CreateEventComponent implements OnInit {
                   this.loading = false;
               }
           });
+  }
+
+  getEventTypeTable(){
+      this.eventService.getEventTypes()
+      .subscribe(et => this.eventTypes = et);
   }
 
 }

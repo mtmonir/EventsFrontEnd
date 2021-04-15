@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map, finalize } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
-import { Event, RawPreviewEvent, RawDetailEvent, Review, Reviews, RawManagerEvent } from '@app/_models';
+import { Event, RawPreviewEvent, RawDetailEvent, Review, Reviews, RawManagerEvent, EventType } from '@app/_models';
 
 
 const baseUrl = `${environment.apiUrl}/Events`;
@@ -19,6 +19,7 @@ export class EventService {
     public Review: Observable<Review>;
     public Reviews: Observable<Reviews>;
     public RawManagerEvent: Observable<RawManagerEvent>;
+    public EventType: Observable<EventType>;
 
     constructor(
       //  private router: Router,
@@ -102,5 +103,9 @@ export class EventService {
     }
     getAllRevData(uid: string){
         return this.http.get<number>(`https://eventfunctionsp2.azurewebsites.net/api/Manager/getallrevdata/${uid}`);
+    }
+
+    getEventTypes(){
+        return this.http.get<EventType>(`https://eventfunctionsp2.azurewebsites.net/api/Manager/eventtypes`)
     }
 }
